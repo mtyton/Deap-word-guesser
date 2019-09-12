@@ -35,14 +35,14 @@ class Gene:
 
     def run_population(self):
         # evaluate whole population
-        pop = self.toolbox.population(500)
+        pop = self.toolbox.population(1500)
         fitnesses = list(map(self.toolbox.evaluate, pop))
         for ind, fit in zip(pop, fitnesses):
             ind.fitness.values = fit
         fits = [ind.fitness.values[0] for ind in pop]
         generation = 0
-        while max(fits) < 1 and generation <300:
-            generation+=1
+        while max(fits) < 1 and generation <500:
+            generation += 1
             print("Generation number: {}".format(generation))
             offsprings = self.toolbox.select(pop, len(pop))
             offsprings = list(map(self.toolbox.clone, offsprings))
@@ -64,7 +64,5 @@ class Gene:
             for ind, fit in zip(changed, fitnesses):
                 ind.fitness.values = fit
 
-
             pop[:] = offsprings
-
             fits = [ind.fitness.values[0] for ind in pop]
